@@ -78,10 +78,10 @@ function zippydownload() {
         filename="${outputName}"
     fi
 
-    echo "${filename}"
+    echo "${id}@${filename}"
 
     # Start download file
-    curl -# -A "${agent}" -e "${ref}" -H "Cookie: JSESSIONID=${jsessionid}" -C - "${dl}" -o "${filename}"
+    curl -# -A "${agent}" -e "${ref}" -H "Cookie: JSESSIONID=${jsessionid}" -C - "${dl}" -o "${id}@${filename}"
 
     rm -f "${cookiefile}" 2>/dev/null
     rm -f "${infofile}" 2>/dev/null
