@@ -76,15 +76,16 @@ function zippydownload() {
     #Rename file output
     if [ -n "${outputName}" ]; then
         filename="${outputName}"
+    else
+         filename="${id}/${filename}"
+         mkdir -p "download/${id}"
     fi
 
-    echo "${id}@${filename}"
+    echo "${filename}"
 
     # Start download file
-    curl -# -A "${agent}" -e "${ref}" -H "Cookie: JSESSIONID=${jsessionid}" -C - "${dl}" -o "${id}@${filename}"
-
-    rm -f "${cookiefile}" 2>/dev/null
-    rm -f "${infofile}" 2>/dev/null
+    curl -# -A "${agent}" -e "${ref}" -H "Cookie: JSESSIONID=${jsessionid}" -C - "${dl}" -o "${filename}"; rm -f "${cookiefile}" 2>/dev/null;rm -f "${infofile}" 2>/dev/null &
+    #wget -c "${dl}" -O "${filename}"; rm -f "${cookiefile}" 2>/dev/null;rm -f "${infofile}" 2>/dev/null &
 }
 
 if [ -f "${1}" ]; then
